@@ -1,5 +1,4 @@
  package com.example.myapplication;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,14 +16,11 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
-
  public class secondscreen extends AppCompatActivity {
-
      FirebaseAuth auth;
      EditText e1, e2;
      PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallback;
      String verification_code;
-
      @Override
      protected void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
@@ -32,18 +28,15 @@ import java.util.concurrent.TimeUnit;
          e1 = (EditText) findViewById(R.id.Phonenumberbox);
          e2 = (EditText) findViewById(R.id.verifytextview);
          auth = FirebaseAuth.getInstance();
-
          mCallback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
              @Override
              public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
 
              }
-
              @Override
              public void onVerificationFailed(FirebaseException e) {
 
              }
-
              @Override
              public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                  super.onCodeSent(s, forceResendingToken);
@@ -53,7 +46,6 @@ import java.util.concurrent.TimeUnit;
          };
 
      }
-
      public void send_sms(View v)
      {
          String number = e1.getText() .toString();
@@ -70,11 +62,10 @@ import java.util.concurrent.TimeUnit;
                             if(task.isSuccessful())
                             {
                                         Toast.makeText(getApplicationContext(),"User signed in successfully",Toast.LENGTH_SHORT).show();
-                         }
+                            }
                          }
                      });
          }
-
          public void verify(View v) {
              String input_code = e2.getText().toString();
              if (verification_code.equals(""))
@@ -86,5 +77,4 @@ import java.util.concurrent.TimeUnit;
                   PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verifyCode, input_code);
                   signInWithPhone(credential);
               }
-
 }
